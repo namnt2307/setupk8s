@@ -1,0 +1,12 @@
+---
+- hosts: k8s-master
+  gather_facts: no
+  become: yes
+  become_user: root
+  tasks:
+    - name: copy pre_install.sh file
+      copy:
+        src: pre_install.sh
+        dest: /tmp/pre_install.sh
+    - name: install
+      shell: bash /tmp/pre_install.sh

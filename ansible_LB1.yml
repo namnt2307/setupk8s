@@ -1,0 +1,38 @@
+---
+- hosts: master1
+  gather_facts: no
+  become: yes
+  become_user: root
+  tasks:
+    - name: install haproxy
+      yum:
+        name: haproxy
+        state: latest
+    - name: install keepalived
+      yum:
+        name: keepalived
+        state: latest
+    - name: copy haproxy config
+      copy: 
+        src: ./config/haproxy.cfg
+        dest: /etc/haproxy/haproxy.cfg
+    - name: copy keepalived config
+      copy:
+        src: ./config/keepalived.conf
+        dest: /etc/keepalived/keepalived.conf
+    - name: copy check_apiserver script
+      copy:
+        src: ./config/check_apiserver.sh
+        dest: /etc/keepalived/check_apiserver.sh
+    - name: start haproxy
+      systemd:
+        name: haproxy
+        state: started
+        enabled: yes
+        masked: no
+    - name: start keepalived
+      systemd:
+        name: keepalived
+        state: started
+        enabled: yes
+        masked: no
