@@ -1,9 +1,17 @@
 # SETUP KUBERNETES CLUSTER
+### STEP
+1. Ansible-playbook pre_install.sh (on all node)
+2. Ansible-playbook ansible_LB1.sh (on first master)
+3. Ansible-playbook ansible_LB2.sh (on other masters)
+4. Init first master
+5. Apply CNI
+6. Join node
+
 ### INITIATE FIRST MASTER NODE
 ````````
 sudo kubeadm init --control-plane-endpoint “172.16.5.234:16443” --upload-certs
 ````````
-### APPLY DOCKER CNI (CONTAINER NETWORK INTERFACE)
+### APPLY KUBERNETES CNI (CONTAINER NETWORK INTERFACE)
 ```````
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
