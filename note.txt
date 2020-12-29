@@ -33,3 +33,6 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 if master node crashed, export KUBECONFIG again
    export KUBECONFIG=/etc/kubernetes/admin.conf
+  
+kubeadm token create && sudo kubeadm init phase upload-certs --upload-certs
+

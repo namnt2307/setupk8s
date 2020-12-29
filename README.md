@@ -3,6 +3,11 @@
 ````````
 sudo kubeadm init --control-plane-endpoint “172.16.5.234:16443” --upload-certs
 ````````
+### APPLY DOCKER CNI (CONTAINER NETWORK INTERFACE)
+```````
+kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+```````
 ### JOIN OTHER MASTER NODES TO CLUSTER
 ```
 kubeadm join 172.16.5.234:16443 --token 9do5ly.ian85n78k6spgo8w \
